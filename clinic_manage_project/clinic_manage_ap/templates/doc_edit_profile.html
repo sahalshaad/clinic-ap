@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOCTOR-EDIT-PROFILE</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #fafafa;
+        }
+
+        .signup-container {
+            max-width: 400px;
+            margin: 50px auto;
+            background-color: #ffffff;
+            border: 1px solid #dbdbdb;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .signup-container h1 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #262626;
+        }
+
+        .form-control {
+            margin-bottom: 15px;
+        }
+
+        .btn-primary {
+            width: 100%;
+            background-color: #0095f6;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #007bb5;
+        }
+
+        .form-label {
+            font-weight: 600;
+            font-size: 14px;
+            color: #8e8e8e;
+        }
+
+        /* Style for the current photo */
+        .current-photo {
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .current-photo img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #dbdbdb;
+        }
+
+        .current-photo p {
+            margin-bottom: 5px;
+            font-size: 14px;
+            color: #8e8e8e;
+        }
+    </style>
+</head>
+<body>
+    <div class="signup-container">
+        <h1>Edit Profile</h1>
+        <form method="POST" action="/doc_edit_profile_post/" enctype="multipart/form-data"> 
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="name" class="form-label">Name:</label>
+                <input name="name" type="text" id="name" class="form-control" placeholder="Enter your Name" value="{{ edit_doctor.docname }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="phone" class="form-label">Phone:</label>
+                <input name="phone" type="number" id="phone" class="form-control" placeholder="Enter your Number" value="{{edit_doctor.docnumber}}" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="email" class="form-label">Email:</label>
+                <input name="email" type="email" id="email" class="form-control" placeholder="Enter your Email" value="{{edit_doctor.docemail}}" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="qualification" class="form-label">Qualification:</label>
+                <input name="qualification" type="text" id="qualification" class="form-control" placeholder="Enter your qualification" value="{{edit_doctor.docqualification}}" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="specialisation" class="form-label">Specialisation:</label>
+                <input name="specialisation" type="text" id="specialisation" class="form-control" placeholder="Enter your specialisation" value="{{edit_doctor.docspecialisation}}" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="gender" class="form-label">Gender:</label>
+                <select name="gender" id="gender" class="form-control" required>
+                    <option value="" selected disabled>Select Gender</option>
+                    <option value="male" {% if edit_doctor.docgender == 'male' %}selected{% endif %}>Male</option>
+                    <option value="female" {% if edit_doctor.docgender == 'female' %}selected{% endif %}>Female</option>
+                    <option value="other" {% if edit_doctor.docgender == 'other' %}selected{% endif %}>Other</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="username" class="form-label">Username:</label>
+                <input name="username" type="text" id="username" class="form-control" placeholder="Enter your Username" value="{{edit_doctor.docusername}}" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="photo" class="form-label">Photo:</label>
+                <div class="current-photo">
+                    <p>Current profile picture:</p>
+                    <img src="{{edit_doctor.docphoto.url}}" alt="Current Profile Photo">
+                </div>
+                <input name="photo" type="file" id="photo" class="form-control" accept="image/*">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Booking</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">View Bookings</h1>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Slot Period</th>
+                    <th>User</th>
+                    <th>Status</th>
+                    <th>Date</th>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Gender</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for booking in bookings %}
+                <tr>
+                    <td>Dr.{{ booking.slot_period }}</td>
+                    <td>{{ booking.users.usr_name }}</td>
+                    <td>{{ booking.status }}</td>
+                    <td>{{ booking.date }}</td>
+                    <td>{{ booking.Name }}</td>
+                    <td>{{ booking.Age }}</td>
+                    <td>{{ booking.Gender }}</td>
+                    <td>{{ booking.Description }}</td>
+                    <td><a href="/payment/{{booking.id}}">Payment</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
